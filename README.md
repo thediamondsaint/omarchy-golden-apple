@@ -44,8 +44,13 @@ omarchy theme bg next          # next wallpaper
 **Why an installer instead of `omarchy theme install <url>`?** That command clones the repo into your
 themes directory, and Omarchy refuses to load Lua from a theme that arrived as a clone — reasonable, since
 a theme's `hyprland.lua` runs at login. But the window shape, the glass and the animations *are* that Lua.
-`./install.sh` copies the files in instead, which makes them yours, so the whole theme applies. Installing
-by URL works too; you just get the colours and the shell surfaces, and Omarchy prints what it dropped.
+`./install.sh` copies the files in instead, which makes them yours, so the whole theme applies.
+
+`omarchy theme install https://github.com/thediamondsaint/omarchy-ios-theme.git` is not broken — the dark
+theme's files sit at the root of this repo precisely so it still works — but you get the colours, the
+wallpapers and the translucent shell surfaces *without* the corners, the blur or the motion, and no light
+variant. Omarchy prints what it dropped. Running `./install.sh` afterwards replaces that clone with the
+real thing.
 
 Requirements: Omarchy 4 (the Quickshell bar and Lua Hyprland config). Optional: ImageMagick, only to
 regenerate wallpapers at your own resolution.
@@ -75,12 +80,15 @@ hl.animation({ leaf = "workspaces", enabled = false })       -- instant workspac
 ## Making it yours
 
 ```
-themes/ios/colors.toml     Apple's system colours; everything themed derives from this
-themes/ios/hyprland.lua    corners, borders, shadow, blur, layer rules, animation curves
-themes/ios/shell.toml      bar and flyout surfaces: translucency, iOS blue selection, spacing
-themes/ios/backgrounds/    four generated mesh gradients
-tools/make-wallpapers.sh   regenerate them at any resolution
+colors.toml                Apple's system colours; everything themed derives from this
+hyprland.lua               corners, borders, shadow, blur, layer rules, animation curves
+shell.toml                 bar and flyout surfaces: translucency, iOS blue selection, spacing
+backgrounds/               four generated mesh gradients
+themes/ios-light/          the same four files for the light variant
+tools/make-wallpapers.sh   regenerate the wallpapers at any resolution
 ```
+
+(The dark theme lives at the repo root so that `omarchy theme install` finds a usable theme there.)
 
 - **Wallpapers at your resolution:** `./install.sh --wallpapers` (or `tools/make-wallpapers.sh 3840x2160`).
   They are built small, blurred, then scaled up, which is why they have no banding and stay ~100 KB.

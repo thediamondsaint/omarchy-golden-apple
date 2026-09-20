@@ -19,10 +19,12 @@ done
 command -v omarchy >/dev/null 2>&1 || { echo "needs omarchy on PATH" >&2; exit 1; }
 
 current=$(omarchy theme current 2>/dev/null | head -1)
-case "$current" in
-  Ios|"Ios Light")
+case "${current,,}" in
+  ios|"ios light"|ios-light)
     previous=""
     [ -f "$state/previous-theme" ] && previous=$(head -1 "$state/previous-theme")
+    # A previous install may have recorded this theme as its own predecessor; ignore that.
+    case "${previous,,}" in ios|"ios light"|ios-light) previous="" ;; esac
     if [ -z "$previous" ]; then
       # Nothing remembered (installed by hand, say): fall back to a stock theme.
       previous="Tokyo Night"

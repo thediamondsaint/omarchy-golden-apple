@@ -11,6 +11,10 @@
 # `omarchy theme install <git-url>` clones instead, and Omarchy refuses to load
 # Lua from a cloned theme — which is exactly where the window shape, the glass
 # and the animations live. A copied theme is yours, so all of it applies.
+#
+# The dark theme's files sit at the root of this repo (that is what makes
+# `omarchy theme install` give at least the colours), and the light one lives in
+# themes/ios-light.
 set -uo pipefail
 
 here=$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)
@@ -38,6 +42,15 @@ warn() { printf 'warning: %s\n' "$*" >&2; }
 die()  { printf '%s\n' "$*" >&2; exit 1; }
 have() { command -v "$1" >/dev/null 2>&1; }
 
+# Where each variant's files are in this repo: the dark one at the root, the light one below.
+source_of() { case "$1" in ios) echo "$here" ;; *) echo "$here/themes/$1" ;; esac; }
+# The files a theme is made of — the rest of the repo (README, install.sh, tools) stays out.
+theme_files=(colors.toml hyprland.lua shell.toml icons.theme preview.png backgrounds)
+
+# A theme folder that is this repo cloned in by `omarchy theme install`: it has no
+# colors.toml of its own at that point, so Omarchy cannot theme anything from it.
+is_clone_of_this_repo() { [ -d "$1/.git" ] && [ -f "$1/install.sh" ] && [ -d "$1/themes" ]; }
+
 have omarchy || die "omarchy is not on PATH — this is a theme for Omarchy (https://omarchy.org)"
 version=$(omarchy version 2>/dev/null | head -1)
 case "$version" in
@@ -48,12 +61,14 @@ esac
 echo "Omarchy $version"
 if [ "$check" -eq 1 ]; then
   for v in "${variants[@]}"; do
-    if [ -d "$themes_dir/$v" ]; then
+    if is_clone_of_this_repo "$themes_dir/$v"; then
+      echo "  would replace $themes_dir/$v, which is this repo cloned in by \`omarchy theme install\`"
+    elif [ -d "$themes_dir/$v" ]; then
       echo "  would replace $themes_dir/$v (a backup copy is kept)"
     else
       echo "  would install $themes_dir/$v"
     fi
-    printf '    %s\n' "$(ls "$here/themes/$v" | tr '\n' ' ')"
+    printf '    from %s: %s\n' "$(source_of "$v")" "${theme_files[*]}"
   done
   [ "$do_apply" -eq 1 ] && echo "  would then run: omarchy theme set $apply"
   exit 0
@@ -81,23 +96,33 @@ fi
 mkdir -p "$themes_dir" "$state"
 for v in "${variants[@]}"; do
   target="$themes_dir/$v"
-  if [ -e "$target" ]; then
+  if is_clone_of_this_repo "$target"; then
+    rm -rf "$target"
+    echo "replaced the git-cloned copy at $target (a cloned theme cannot carry the Lua)"
+  elif [ -e "$target" ]; then
     backup="$target.bak.$(date +%s)"
     mv "$target" "$backup" || die "could not move $target aside"
     echo "kept your existing $v theme as $(basename "$backup")"
   fi
-  cp -r "$here/themes/$v" "$target" || die "could not copy the $v theme into $themes_dir"
+  mkdir -p "$target"
+  src=$(source_of "$v")
+  for f in "${theme_files[@]}"; do
+    [ -e "$src/$f" ] || continue
+    cp -r "$src/$f" "$target/" || die "could not copy $f into $target"
+  done
+  [ -f "$target/colors.toml" ] || die "no colors.toml for $v in $src"
   # A .git directory here would make Omarchy treat the theme as a stranger's and
-  # drop its Lua; copying from the repo should never bring one, but make sure.
+  # drop its Lua; copying file by file should never bring one, but make sure.
   rm -rf "$target/.git"
   echo "installed $target"
 done
 
 if [ "$do_apply" -eq 1 ]; then
+  # `omarchy theme current` title-cases the folder name, so this theme reports as "Ios"/"Ios Light".
+  # Remember anything else as what to go back to — and never remember this theme as its own predecessor.
   current=$(omarchy theme current 2>/dev/null | head -1)
-  case "$current" in
-    iOS|ios|"iOS Light"|ios-light) ;;
-    "") ;;
+  case "${current,,}" in
+    ios|"ios light"|ios-light|"") ;;
     *) printf '%s\n' "$current" > "$state/previous-theme"; echo "your current theme ($current) is remembered for ./uninstall.sh" ;;
   esac
 
