@@ -1,0 +1,148 @@
+# iOS — Omarchy shell surfaces.
+#
+# The bar and every flyout are drawn translucent here; themes/ios/hyprland.lua
+# blurs those layers, and the two together are the frosted glass. Corner radius
+# and gaps are not set here: the shell mirrors Hyprland's `decoration:rounding`,
+# which the theme's hyprland.lua sets to 14.
+
+[bar]
+background       = "#000000"
+background-alpha = 0.52
+text             = "#ffffff"
+# Modules calling attention to themselves (recording, alerts, updates).
+active           = "#ff453a"
+scale-with-font  = true
+size-horizontal  = 28
+size-vertical    = 30
+
+[hyprland]
+# Matches the window border gradient from hyprland.lua.
+active-border            = "rgba(0a84ffff) rgba(64d2ffff) 45deg"
+active-border-foreground = "#ffffff"
+
+[controls]
+# iOS controls are filled chips rather than outlined boxes: no border at rest,
+# the fill carries the state.
+normal-color        = "#ffffff"
+normal-fill-alpha   = 0.08
+normal-border       = "#ffffff"
+normal-border-width = 0
+normal-border-alpha = 0.0
+
+hover-cursor-color        = "#ffffff"
+hover-cursor-fill-alpha   = 0.16
+hover-cursor-border       = "#ffffff"
+hover-cursor-border-width = 0
+hover-cursor-border-alpha = 0.0
+
+# Keyboard focus is the one place iOS shows a ring.
+focus-color        = "#0a84ff"
+focus-fill-alpha   = 0.18
+focus-border       = "#0a84ff"
+focus-border-width = 1
+focus-border-alpha = 0.55
+
+selected-color        = "#0a84ff"
+selected-fill-alpha   = 0.30
+selected-border       = "#0a84ff"
+selected-border-width = 0
+selected-border-alpha = 1.0
+
+pressed-fill-alpha   = 0.26
+selection-fill-alpha = 0.35
+
+[spacing]
+# A little airier than stock, the way iOS spaces its rows.
+scale = 1.08
+scale-with-font = true
+
+[font]
+base-size = 12
+
+[popups]
+background       = "#1c1c1e"
+background-alpha = 0.72
+text             = "#ffffff"
+# A hairline edge, not an accent outline: iOS cards are separated by light, not colour.
+border           = "#ffffff"
+border-alpha     = 0.12
+border-width     = 1
+
+[tooltip]
+background       = "#1c1c1e"
+background-alpha = 0.8
+text             = "#ffffff"
+border           = "#ffffff"
+border-alpha     = 0.12
+
+[notifications]
+background       = "#1c1c1e"
+background-alpha = 0.74
+text             = "#ffffff"
+border           = "#ffffff"
+border-alpha     = 0.12
+border-width     = 1
+countdown        = "#0a84ff"
+
+[launcher]
+background                = "#1c1c1e"
+background-alpha          = 0.72
+text                      = "#ffffff"
+border                    = "#ffffff"
+border-alpha              = 0.12
+scrim                     = "#000000"
+scrim-alpha               = 0.45
+# The selected row is an iOS list selection: solid systemBlue, white label.
+selected-background       = "#0a84ff"
+selected-background-alpha = 0.95
+selected-text             = "#ffffff"
+selected-border           = "#0a84ff"
+selected-border-alpha     = 0.0
+
+[menu]
+background                = "#1c1c1e"
+background-alpha          = 0.74
+text                      = "#ffffff"
+border                    = "#ffffff"
+border-alpha              = 0.12
+scrim                     = "#000000"
+scrim-alpha               = 0.45
+selected-background       = "#0a84ff"
+selected-background-alpha = 0.95
+selected-text             = "#ffffff"
+selected-border           = "#0a84ff"
+selected-border-alpha     = 0.0
+
+[polkit]
+background       = "#1c1c1e"
+background-alpha = 0.86
+text             = "#ffffff"
+text-error       = "#ff453a"
+border           = "#ffffff"
+border-error     = "#ff453a"
+border-alpha     = 0.12
+scrim            = "#000000"
+scrim-alpha      = 0.5
+accent           = "#0a84ff"
+
+[lock]
+background       = "#1c1c1e"
+background-alpha = 0.55
+text             = "#ffffff"
+placeholder      = "#8e8e93"
+text-error       = "#ff453a"
+border           = "#ffffff"
+border-active    = "#0a84ff"
+border-error     = "#ff453a"
+border-alpha     = 0.22
+selection        = "#0a84ff"
+selection-alpha  = 0.45
+
+[image-picker]
+scrim                   = "#000000"
+scrim-alpha             = 0.5
+text                    = "#ffffff"
+selected-border         = "#0a84ff"
+selected-border-alpha   = 1.0
+unselected-border       = "#ffffff"
+unselected-border-alpha = 0.22
