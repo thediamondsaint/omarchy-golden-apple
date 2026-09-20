@@ -1,119 +1,127 @@
-# iOS theme for Omarchy
+# Golden Apple — a gold glass theme for Omarchy
 
-Apple's system palette, continuous ("squircle") corners, hairline borders that light up in systemBlue,
-frosted glass on the bar and menus, and iOS timing curves — for [Omarchy](https://omarchy.org) 4.
+Light gold on warm black, continuous ("squircle") corners, and glass wherever a surface can be glass:
+the bar, the menus, the notifications and the terminal itself. For [Omarchy](https://omarchy.org) 4.
 
-Two variants: **iOS** (dark) and **iOS Light**.
+Two variants: **Golden Apple** (dark) and **Golden Apple Light** (the same gold on warm paper).
 
-<p align="center"><img src="docs/ios-desktop.jpg" alt="The iOS dark theme: rounded terminal windows over a deep blue gradient wallpaper, a translucent bar with iOS-style status icons"></p>
+<p align="center"><img src="docs/golden-apple-desktop.jpg" alt="Golden Apple: rounded terminal windows with gold borders over an amber gradient, the wallpaper glowing through the glass, and a translucent bar"></p>
 
-<p align="center"><img src="docs/ios-light-desktop.jpg" width="49%" alt="The light variant: white rounded cards on a soft blue-white gradient"> <img src="docs/ios-menu.jpg" width="49%" alt="The Omarchy menu as frosted glass with a solid systemBlue selected row"></p>
+<p align="center"><img src="docs/golden-apple-light-desktop.jpg" width="49%" alt="The light variant: cream cards with gold borders on warm paper"> <img src="docs/golden-apple-menu.jpg" width="49%" alt="The Omarchy menu as gold-tinted frosted glass with a solid gold selected row"></p>
 
 ## What it changes
 
 | Surface | What you get |
 |---|---|
-| Windows | 14px continuous corners (`rounding_power 3.4`), 1px hairline border, systemBlue→systemCyan gradient when focused, soft shadow, iOS gaps |
-| Bar, menus, notifications, OSD | Translucent and blurred — the frosted material iOS uses for Control Center |
-| Selected rows | Solid systemBlue pill with white label, the way an iOS list selects |
-| Terminal + apps | Apple's system colours: systemBlue `#0a84ff`, systemRed `#ff453a`, systemGreen `#30d158`, systemPurple `#bf5af2`… |
-| Motion | Apple's curves: a soft standard ease, a gentle overshoot on appear, a quick exit; workspaces slide like Home Screen pages |
-| Wallpapers | Four mesh gradients per variant, built from the same system colours |
+| Windows | 14px continuous corners (`rounding_power 3.4`), 1px hairline border, light-gold gradient when focused, soft shadow |
+| Terminal | Actually transparent — `alpha` in `foot.ini`, so the background goes to glass and the **text stays fully opaque** |
+| Bar, menus, notifications, OSD | Translucent, blurred, and tinted gold: `#1c1710` at 62% over a 20px blur |
+| Selected rows | A solid light-gold pill with dark text |
+| Colours | Champagne gold `#e8c77d` carries the accent; the ANSI set leans warm so nothing reads cold beside it |
+| Motion | Soft standard ease, a small overshoot on appear, a quick exit, Home Screen-style workspace slide |
+| Wallpapers | Four warm mesh gradients per variant — amber, ember, savanna, bronze (and champagne, honey, linen, parchment) |
 
 Pairs with [omarchy-ios-bar](https://github.com/thediamondsaint/omarchy-ios-bar), which redraws the bar's
-status icons (Wi-Fi fan, iPhone battery, speaker with waves) in the same style. The two are independent —
-either works on its own.
+status icons as vector shapes that follow the theme's colours. The two are independent.
 
 ## Install
 
 ```bash
-git clone https://github.com/thediamondsaint/omarchy-ios-theme.git
-cd omarchy-ios-theme
-./install.sh            # installs both variants, switches to iOS (dark)
+git clone https://github.com/thediamondsaint/omarchy-golden-apple.git
+cd omarchy-golden-apple
+./install.sh              # installs both variants, switches to Golden Apple (dark)
 ```
 
-Then switch whenever you like:
-
 ```bash
-omarchy theme set ios          # dark
-omarchy theme set ios-light    # light
-omarchy theme bg next          # next wallpaper
-./uninstall.sh                 # back to your previous theme
+omarchy theme set golden-apple         # dark
+omarchy theme set golden-apple-light   # light
+omarchy theme bg next                  # next wallpaper
+./uninstall.sh                         # back to your previous theme
 ```
 
 **Why an installer instead of `omarchy theme install <url>`?** That command clones the repo into your
-themes directory, and Omarchy refuses to load Lua from a theme that arrived as a clone — reasonable, since
-a theme's `hyprland.lua` runs at login. But the window shape, the glass and the animations *are* that Lua.
-`./install.sh` copies the files in instead, which makes them yours, so the whole theme applies.
+themes directory, and Omarchy refuses to load Lua or a terminal config from a theme that arrived as a
+clone — reasonable, since both run code. But the corners, the glass, the motion and the terminal's
+transparency *are* those files. `./install.sh` copies them in instead, which makes them yours.
 
-`omarchy theme install https://github.com/thediamondsaint/omarchy-ios-theme.git` is not broken — the dark
-theme's files sit at the root of this repo precisely so it still works — but you get the colours, the
-wallpapers and the translucent shell surfaces *without* the corners, the blur or the motion, and no light
-variant. Omarchy prints what it dropped. Running `./install.sh` afterwards replaces that clone with the
-real thing.
+Installing by URL still works and is not broken — the dark variant's files sit at the root of this repo
+for exactly that reason — you simply get the colours, the wallpapers and the translucent shell without
+the corners, the blur, the motion or the see-through terminal. Running `./install.sh` afterwards replaces
+that clone with the real thing.
 
-Requirements: Omarchy 4 (the Quickshell bar and Lua Hyprland config). Optional: ImageMagick, only to
-regenerate wallpapers at your own resolution.
+Requirements: Omarchy 4. Optional: ImageMagick, only to regenerate wallpapers at your own resolution.
+
+## Your own wallpaper (a lion, for instance)
+
+```bash
+tools/add-wallpaper.sh ~/Pictures/lion.jpg                       # dark variant
+tools/add-wallpaper.sh ~/Pictures/lion.jpg golden-apple-light    # light variant
+tools/add-wallpaper.sh ~/Pictures/lion.jpg --repo                # ship it with the theme
+```
+
+It lands in `~/.config/omarchy/backgrounds/golden-apple/`, which is Omarchy's place for wallpapers you
+add yourself: it survives re-running `./install.sh` and joins the rotation in `omarchy theme bg next`.
+A photograph is where the glass earns its keep — a blur needs something to work with, which a flat
+gradient never gives it.
 
 ## Performance
 
-The glass is the expensive part of an iOS look, so it is spent only where it shows:
+Glass is the expensive part, so it is spent where it shows:
 
-- **Blur is on, but windows are excluded** (`no_blur` on every window). Only the shell's own layers — bar,
-  menus, notifications, OSD, bar panels — are blurred, and those are small and rarely all on screen.
-- **`xray = true`**: the blur samples the wallpaper rather than the windows behind it. That is both cheaper
-  and truer to iOS, where the material is one consistent frost instead of a smear of whatever is open.
-- **Two passes, radius 20.** In Hyprland the cost is in the passes, not the radius, so the radius is set
-  where the material reads like iOS and the pass count stays low.
-- **No `dim_inactive`, no full-screen effects, no shadow on layers.**
+- **`xray = true`** — the blur samples the wallpaper rather than the stack of windows under it. One
+  consistent material instead of a smear, and the cost is the same with one window open or twenty.
+- **Two passes, radius 20.** In Hyprland the cost is in the passes, not the radius, so the radius goes
+  where the material reads right and the pass count stays low.
+- **The terminal's transparency is free** — it is the app drawing its own background, not an effect.
+- No `dim_inactive`, no layer shadows, no full-screen effects.
 
-If you want it leaner still, edit `~/.config/omarchy/themes/ios/hyprland.lua`:
+Leaner, in `~/.config/omarchy/themes/golden-apple/hyprland.lua`:
 
 ```lua
-blur = { enabled = false },                                  -- flat, zero cost
-hl.animation({ leaf = "workspaces", enabled = false })       -- instant workspace switching
+blur = { enabled = false },                               -- flat, zero cost
+hl.animation({ leaf = "workspaces", enabled = false })    -- instant workspace switching
 ```
 
-…then `omarchy theme set ios` to re-apply. The same file is where `rounding`, `gaps_in/out` and
-`border_size` live if you want tighter or airier windows.
+…and `alpha=1.0` in the same folder's `foot.ini` for a solid terminal. Re-apply with
+`omarchy theme set golden-apple`.
 
 ## Making it yours
 
 ```
-colors.toml                Apple's system colours; everything themed derives from this
+colors.toml                the palette everything else derives from
 hyprland.lua               corners, borders, shadow, blur, layer rules, animation curves
-shell.toml                 bar and flyout surfaces: translucency, iOS blue selection, spacing
+shell.toml                 bar and flyout surfaces: gold tint, translucency, selection
+foot.ini                   terminal colours + the alpha that makes it glass
 backgrounds/               four generated mesh gradients
-themes/ios-light/          the same four files for the light variant
+themes/golden-apple-light/ the same five files for the light variant
 tools/make-wallpapers.sh   regenerate the wallpapers at any resolution
+tools/add-wallpaper.sh     drop your own image in and switch to it
 ```
 
-(The dark theme lives at the repo root so that `omarchy theme install` finds a usable theme there.)
+- **More or less gold in the glass:** `background` and `background-alpha` in `shell.toml`'s `[menu]`,
+  `[popups]`, `[bar]`. The tint is the surface colour, not the blur.
+- **A more solid terminal:** raise `alpha` in `foot.ini` (0.82 dark / 0.90 light by default).
+- **Wallpapers at your resolution:** `./install.sh --wallpapers`, or `tools/make-wallpapers.sh 3840x2160`.
+- **A taller, airier bar:** `[bar] size-horizontal` and `[font] base-size` in `shell.toml`.
 
-- **Wallpapers at your resolution:** `./install.sh --wallpapers` (or `tools/make-wallpapers.sh 3840x2160`).
-  They are built small, blurred, then scaled up, which is why they have no banding and stay ~100 KB.
-- **A taller, airier bar:** in `shell.toml`, raise `[bar] size-horizontal` and `[font] base-size`.
-- **Less glass:** raise `background-alpha` in `[bar]`, `[menu]`, `[popups]` toward 1.0.
-- **Your own wallpaper:** `omarchy theme bg set ~/Pictures/whatever.jpg`. The blur has more to work with
-  on a photo than on a gradient.
-
-After editing anything in the installed theme, re-apply it: `omarchy theme set ios`.
+After editing anything in the installed theme, re-apply it: `omarchy theme set golden-apple`.
 
 ## Troubleshooting
 
 - **It looks half-applied — colours changed, but corners are square and nothing is frosted.** The theme
-  was installed as a git clone, so Omarchy dropped its `hyprland.lua` (it says so on stderr). Remove it and
-  run `./install.sh` from this repo instead.
-- **The theme picker says "Ios".** Omarchy builds the display name by title-casing the folder name, so
-  `ios` shows up as `Ios`. Cosmetic only; `omarchy theme set ios` is the command either way.
-- **Windows have no shadow / blur does nothing.** Check `hyprctl configerrors`, then confirm the values
-  landed: `hyprctl getoption decoration:rounding` should be 14 and `decoration:blur:size` 20. If they are
-  not, the theme's Lua was not loaded — see the first point.
-- **Blur is invisible.** With a smooth gradient wallpaper there is nothing to blur; it shows on photos.
-- **A GTK app ignores the colours.** Omarchy themes GTK through its own templates; some apps need
-  `omarchy restart` of that app, and a few (Electron) need their own theme.
+  was installed as a git clone, so Omarchy dropped its Lua and `foot.ini` (it says so on stderr). Run
+  `./install.sh` from this repo instead.
+- **Windows are translucent but what shows through is sharp, not blurred.** Hyprland keeps window rules
+  a theme registered even across `hyprctl reload`, so if you previously ran a theme that set `no_blur`
+  on windows, that rule stays until Hyprland restarts — log out and back in once. The shell's own
+  surfaces (bar, menus) blur immediately either way.
+- **An app is opaque.** Only apps that draw a transparent background can be glass. The terminal does it
+  through `foot.ini`; Electron and most GTK apps cannot, and a Hyprland `opacity` rule fades their text
+  along with the background, which is why this theme keeps that rule gentle.
+- **Blur is invisible.** With a flat gradient wallpaper there is nothing to blur. Try a photograph.
+- **The picker shows "Golden Apple" but `omarchy theme set Golden Apple` fails.** Use the folder name:
+  `omarchy theme set golden-apple`.
 
 ## License
 
-MIT, see [LICENSE](LICENSE). Apple's system colour *values* are facts about a published design system;
-the name "iOS" is used descriptively to say what this looks like. Not affiliated with Apple.
+MIT, see [LICENSE](LICENSE). Not affiliated with Apple; "Golden Apple" is a name, not a claim.

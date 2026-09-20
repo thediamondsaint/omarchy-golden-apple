@@ -1,34 +1,37 @@
-# iOS — Apple's system colors, dark mode.
-# Values are Apple's published UIColor systemColors (dark) and the label/gray
-# ramps, so anything themed from here lands on the same palette as an iPhone.
+# Golden Apple — light gold on warm black.
+#
+# The gold is champagne rather than brass: #e8c77d carries the accent, the borders
+# and the selections, and every surface is warmed a few degrees so nothing reads
+# cold beside it. The ANSI colours lean warm for the same reason — the blue is a
+# dusty slate so the gold keeps the room.
 mode = "dark"
 
-accent = "#0a84ff"            # systemBlue (dark)
-selection = "#1c4a80"         # systemBlue at reading strength behind text
-muted = "#48484a"             # systemGray4 (dark) — terminal "bright black"
+accent = "#e8c77d"             # light gold
+selection = "#4a3c1f"          # gold at reading strength behind text
+muted = "#6b5d42"              # terminal "bright black"
 
-background = "#000000"        # iOS dark base
-dark_background = "#000000"
-darker_background = "#000000"
-lighter_background = "#1c1c1e" # systemGray6 (dark) — elevated cards
+background = "#12100b"         # warm near-black
+dark_background = "#0d0b07"
+darker_background = "#080704"
+lighter_background = "#211b12"  # elevated cards
 
-foreground = "#ffffff"         # label
-dark_foreground = "#8e8e93"    # systemGray — tertiary text, dimmed icons
-light_foreground = "#ebebf5"   # secondaryLabel
-bright_foreground = "#ffffff"
+foreground = "#f5efe0"          # warm white
+dark_foreground = "#a2957a"     # tertiary text, dimmed icons
+light_foreground = "#e8dfc9"
+bright_foreground = "#fffaf0"
 
-red = "#ff453a"                # systemRed
-yellow = "#ffd60a"             # systemYellow
-orange = "#ff9f0a"             # systemOrange
-green = "#30d158"              # systemGreen
-cyan = "#64d2ff"               # systemCyan
-blue = "#0a84ff"               # systemBlue
-magenta = "#bf5af2"            # systemPurple
-brown = "#ac8e68"              # systemBrown
+red = "#e5645a"
+yellow = "#f0c752"
+orange = "#e89b3c"
+green = "#a8c06a"
+cyan = "#8fbfae"
+blue = "#8aa9c9"
+magenta = "#c99ac0"
+brown = "#a9793f"
 
-bright_red = "#ff6961"
-bright_yellow = "#ffe066"
-bright_green = "#5ce88a"
-bright_cyan = "#8ee0ff"
-bright_blue = "#4ca6ff"
-bright_magenta = "#d08cff"
+bright_red = "#f0827a"
+bright_yellow = "#ffdc7a"
+bright_green = "#c2d98a"
+bright_cyan = "#a9d6c8"
+bright_blue = "#a9c3dd"
+bright_magenta = "#ddb4d6"

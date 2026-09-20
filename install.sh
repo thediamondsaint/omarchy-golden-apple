@@ -1,8 +1,8 @@
 #!/usr/bin/env bash
-# Install the iOS theme for Omarchy.
+# Install the Golden Apple theme for Omarchy.
 #
-#   ./install.sh              install both variants and switch to iOS (dark)
-#   ./install.sh --light      ... and switch to iOS Light instead
+#   ./install.sh              install both variants and switch to Golden Apple (dark)
+#   ./install.sh --light      ... and switch to Golden Apple Light instead
 #   ./install.sh --no-apply   install them but keep your current theme
 #   ./install.sh --wallpapers regenerate the wallpapers at this display's resolution first
 #   ./install.sh --check      say what would happen, change nothing
@@ -14,22 +14,22 @@
 #
 # The dark theme's files sit at the root of this repo (that is what makes
 # `omarchy theme install` give at least the colours), and the light one lives in
-# themes/ios-light.
+# themes/golden-apple-light.
 set -uo pipefail
 
 here=$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)
 themes_dir="$HOME/.config/omarchy/themes"
-state="$HOME/.local/state/omarchy-ios-theme"
-variants=(ios ios-light)
-apply=ios
+state="$HOME/.local/state/omarchy-golden-apple"
+variants=(golden-apple golden-apple-light)
+apply=golden-apple
 do_apply=1
 check=0
 regen=0
 
 for arg in "$@"; do
   case "$arg" in
-    --light) apply=ios-light ;;
-    --dark) apply=ios ;;
+    --light) apply=golden-apple-light ;;
+    --dark) apply=golden-apple ;;
     --no-apply) do_apply=0 ;;
     --wallpapers) regen=1 ;;
     --check) check=1 ;;
@@ -43,9 +43,9 @@ die()  { printf '%s\n' "$*" >&2; exit 1; }
 have() { command -v "$1" >/dev/null 2>&1; }
 
 # Where each variant's files are in this repo: the dark one at the root, the light one below.
-source_of() { case "$1" in ios) echo "$here" ;; *) echo "$here/themes/$1" ;; esac; }
+source_of() { case "$1" in golden-apple) echo "$here" ;; *) echo "$here/themes/$1" ;; esac; }
 # The files a theme is made of — the rest of the repo (README, install.sh, tools) stays out.
-theme_files=(colors.toml hyprland.lua shell.toml icons.theme preview.png backgrounds)
+theme_files=(colors.toml hyprland.lua shell.toml foot.ini icons.theme preview.png backgrounds)
 
 # A theme folder that is this repo cloned in by `omarchy theme install`: it has no
 # colors.toml of its own at that point, so Omarchy cannot theme anything from it.
@@ -118,11 +118,11 @@ for v in "${variants[@]}"; do
 done
 
 if [ "$do_apply" -eq 1 ]; then
-  # `omarchy theme current` title-cases the folder name, so this theme reports as "Ios"/"Ios Light".
+  # `omarchy theme current` title-cases the folder name, so this theme reports as "Golden Apple".
   # Remember anything else as what to go back to — and never remember this theme as its own predecessor.
   current=$(omarchy theme current 2>/dev/null | head -1)
   case "${current,,}" in
-    ios|"ios light"|ios-light|"") ;;
+    golden-apple|"golden apple"|"golden apple light"|golden-apple-light|"") ;;
     *) printf '%s\n' "$current" > "$state/previous-theme"; echo "your current theme ($current) is remembered for ./uninstall.sh" ;;
   esac
 
@@ -141,7 +141,7 @@ fi
 
 echo
 echo "Done. Switch variants any time:"
-echo "  omarchy theme set ios          # dark"
-echo "  omarchy theme set ios-light    # light"
-echo "  omarchy theme bg next          # next wallpaper"
+echo "  omarchy theme set golden-apple         # dark"
+echo "  omarchy theme set golden-apple-light   # light"
+echo "  omarchy theme bg next                  # next wallpaper"
 echo "Undo with ./uninstall.sh"

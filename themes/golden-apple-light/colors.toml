@@ -1,0 +1,36 @@
+# Golden Apple Light — the same gold on warm paper.
+#
+# Surfaces are cream rather than white so the gold has something to sit in, and the
+# accent drops to a deeper gold (#a87a1f) because champagne on paper is unreadable.
+# The ANSI colours are the warm, darkened set a light background needs.
+mode = "light"
+
+accent = "#a87a1f"             # deep gold — readable on cream
+selection = "#f0e0b8"          # gold wash behind selected text
+muted = "#b9a67c"              # terminal "bright black"
+
+background = "#faf6ec"         # warm paper
+dark_background = "#f1ead9"    # bar, recessed surfaces
+darker_background = "#e5dac2"
+lighter_background = "#fffdf7"  # elevated cards
+
+foreground = "#2a2318"          # warm near-black text
+dark_foreground = "#8a7c5f"     # tertiary text
+light_foreground = "#4a4030"
+bright_foreground = "#1a1610"
+
+red = "#b23a2e"
+yellow = "#8e6a12"
+orange = "#b05e18"
+green = "#4e7a2e"
+cyan = "#2c7a70"
+blue = "#3a6b99"
+magenta = "#8a4e86"
+brown = "#7a5a33"
+
+bright_red = "#d1503f"
+bright_yellow = "#a87a1f"
+bright_green = "#628f3a"
+bright_cyan = "#3a938a"
+bright_blue = "#4b81b3"
+bright_magenta = "#a3639e"

@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# Generate the iOS-style mesh-gradient wallpapers.
+# Generate the Golden Apple mesh-gradient wallpapers.
 #
 #   tools/make-wallpapers.sh [WIDTHxHEIGHT]      # default 2560x1440
 #
@@ -8,7 +8,7 @@
 # iOS ships. A little noise is added at the end: a smooth gradient in 8-bit
 # banks into visible bands otherwise.
 #
-# Colours are Apple's system colours, so the wallpapers and the palette agree.
+# Colours come from the theme's own palette, so the wallpapers and the UI agree.
 set -euo pipefail
 here=$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)
 size="${1:-2560x1440}"
@@ -48,34 +48,34 @@ blobs() {   # base_color compose_mode out "blob..."  -> writes the wallpaper to 
   echo "  $(basename "$(dirname "$out")")/$(basename "$out")  $(du -h "$out" | cut -f1)"
 }
 
-dark="$here/themes/ios/backgrounds"
-light="$here/themes/ios-light/backgrounds"
+dark="$here/backgrounds"
+light="$here/themes/golden-apple-light/backgrounds"
 mkdir -p "$dark" "$light"
 
-echo "iOS (dark) — ${size}"
-# Deep space blue: the default. Blue and cyan rising out of black.
-blobs "#000000" Screen "$dark/1-horizon.jpg" \
-  "#0a3f8f 18 78 55" "#0a84ff 52 96 45" "#1b3a6b 86 70 42" "#102a4d 68 30 38"
-# Aurora: iOS 17's purple/teal wash.
-blobs "#000000" Screen "$dark/2-aurora.jpg" \
-  "#5e2b97 22 26 48" "#0a84ff 70 62 46" "#1f7a6b 88 18 34" "#2a1a4d 45 80 46"
-# Sunset: the warm end of the system palette.
-blobs "#050208" Screen "$dark/3-sunset.jpg" \
-  "#8a2b4d 20 80 52" "#b4531a 60 92 44" "#3b1d6b 82 24 46" "#5c1f3f 40 40 38"
-# Graphite: near-black for people who want the icons to do the talking.
-blobs "#000000" Screen "$dark/4-graphite.jpg" \
-  "#1c1c1e 30 70 60" "#2c2c2e 75 35 50" "#0a84ff 90 95 22"
+echo "Golden Apple (dark) — ${size}"
+# Amber: the default. Deep gold rising out of warm black.
+blobs "#0d0b07" Screen "$dark/1-amber.jpg" \
+  "#8a6320 18 78 55" "#c79a3a 52 96 45" "#5a3f14 86 70 42" "#3a2a10 68 30 38"
+# Ember: gold with a red-brown heart, for a lion-coloured desktop.
+blobs "#0b0805" Screen "$dark/2-ember.jpg" \
+  "#7a3f1a 22 84 52" "#c98a2e 62 96 46" "#4a2a12 86 40 44" "#2e1d0c 40 34 40"
+# Leaf: gold against the olive end of the palette.
+blobs "#0b0a06" Screen "$dark/3-savanna.jpg" \
+  "#6b6a22 20 80 50" "#c7a33a 64 94 46" "#3d3a16 88 34 42" "#241f0e 44 40 38"
+# Bronze: nearly flat, for wallpapers that should not compete with the glass.
+blobs "#0d0b07" Screen "$dark/4-bronze.jpg" \
+  "#221b10 30 70 60" "#2e2415 75 35 50" "#c79a3a 92 96 20"
 
-echo "iOS Light — ${size}"
-# Daybreak: the white-to-blue wash of the iOS Settings background.
-blobs "#ffffff" Multiply "$light/1-daybreak.jpg" \
-  "#cfe3ff 22 78 55" "#e7f0ff 60 92 48" "#dbe7fb 85 30 44"
-# Peach: warm systemPink/systemOrange at low strength.
-blobs "#ffffff" Multiply "$light/2-peach.jpg" \
-  "#ffd9d3 24 74 52" "#ffe6cc 64 90 46" "#f3ddf0 84 26 44"
-# Mint: systemGreen/systemTeal.
-blobs "#ffffff" Multiply "$light/3-mint.jpg" \
-  "#cdeede 26 76 52" "#d8f0f5 66 90 44" "#e6f2e0 86 28 42"
-# Paper: almost flat, systemGroupedBackground with a hint of blue.
-blobs "#f7f7fa" Multiply "$light/4-paper.jpg" \
-  "#eceef5 30 70 60" "#e6ebf7 78 34 50"
+echo "Golden Apple Light — ${size}"
+# Champagne: cream washed with light gold.
+blobs "#fffdf7" Multiply "$light/1-champagne.jpg" \
+  "#f2e3bf 22 78 55" "#fbf1d8 60 92 48" "#eee0c4 85 30 44"
+# Honey: warmer, towards amber.
+blobs "#fffdf7" Multiply "$light/2-honey.jpg" \
+  "#f7e0b4 24 74 52" "#fae9c9 64 90 46" "#f1ddc6 84 26 44"
+# Linen: the quietest of the four.
+blobs "#fffdf7" Multiply "$light/3-linen.jpg" \
+  "#f3eee0 26 76 52" "#f8f2e6 66 90 44" "#efe8d6 86 28 42"
+# Parchment: almost flat, warm paper with a hint of gold.
+blobs "#faf6ec" Multiply "$light/4-parchment.jpg" \
+  "#f2ecdb 30 70 60" "#efe6cf 78 34 50"

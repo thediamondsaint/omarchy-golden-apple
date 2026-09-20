@@ -1,58 +1,58 @@
-# iOS — Omarchy shell surfaces.
+# Golden Apple — Omarchy shell surfaces.
 #
-# The bar and every flyout are drawn translucent here; themes/ios/hyprland.lua
-# blurs those layers, and the two together are the frosted glass. Corner radius
-# and gaps are not set here: the shell mirrors Hyprland's `decoration:rounding`,
-# which the theme's hyprland.lua sets to 14.
+# Every surface here is translucent and tinted warm; hyprland.lua blurs those
+# layers, and the two together are the gold glass. The tint lives in the surface
+# colour (#1c1710 — black with gold in it), not in the blur, which only carries
+# through whatever is behind the window.
+#
+# Corner radius and gaps are not set here: the shell mirrors Hyprland's
+# `decoration:rounding`, which this theme's hyprland.lua sets to 14.
 
 [bar]
-background       = "#000000"
-background-alpha = 0.52
-text             = "#ffffff"
+background       = "#14110a"
+background-alpha = 0.46
+text             = "#f5efe0"
 # Modules calling attention to themselves (recording, alerts, updates).
-active           = "#ff453a"
+active           = "#e5645a"
 scale-with-font  = true
 size-horizontal  = 28
 size-vertical    = 30
 
 [hyprland]
 # Matches the window border gradient from hyprland.lua.
-active-border            = "rgba(0a84ffff) rgba(64d2ffff) 45deg"
-active-border-foreground = "#ffffff"
+active-border            = "rgba(e8c77dff) rgba(c79a3aff) 45deg"
+active-border-foreground = "#e8c77d"
 
 [controls]
-# iOS controls are filled chips rather than outlined boxes: no border at rest,
-# the fill carries the state.
-normal-color        = "#ffffff"
+# Filled chips rather than outlined boxes: the fill carries the state, in gold.
+normal-color        = "#f5efe0"
 normal-fill-alpha   = 0.08
-normal-border       = "#ffffff"
+normal-border       = "#e8c77d"
 normal-border-width = 0
 normal-border-alpha = 0.0
 
-hover-cursor-color        = "#ffffff"
-hover-cursor-fill-alpha   = 0.16
-hover-cursor-border       = "#ffffff"
+hover-cursor-color        = "#e8c77d"
+hover-cursor-fill-alpha   = 0.18
+hover-cursor-border       = "#e8c77d"
 hover-cursor-border-width = 0
 hover-cursor-border-alpha = 0.0
 
-# Keyboard focus is the one place iOS shows a ring.
-focus-color        = "#0a84ff"
-focus-fill-alpha   = 0.18
-focus-border       = "#0a84ff"
+focus-color        = "#e8c77d"
+focus-fill-alpha   = 0.20
+focus-border       = "#e8c77d"
 focus-border-width = 1
-focus-border-alpha = 0.55
+focus-border-alpha = 0.6
 
-selected-color        = "#0a84ff"
-selected-fill-alpha   = 0.30
-selected-border       = "#0a84ff"
+selected-color        = "#e8c77d"
+selected-fill-alpha   = 0.32
+selected-border       = "#e8c77d"
 selected-border-width = 0
 selected-border-alpha = 1.0
 
-pressed-fill-alpha   = 0.26
+pressed-fill-alpha   = 0.28
 selection-fill-alpha = 0.35
 
 [spacing]
-# A little airier than stock, the way iOS spaces its rows.
 scale = 1.08
 scale-with-font = true
 
@@ -60,89 +60,89 @@ scale-with-font = true
 base-size = 12
 
 [popups]
-background       = "#1c1c1e"
-background-alpha = 0.72
-text             = "#ffffff"
-# A hairline edge, not an accent outline: iOS cards are separated by light, not colour.
-border           = "#ffffff"
-border-alpha     = 0.12
+background       = "#1c1710"
+background-alpha = 0.62
+text             = "#f5efe0"
+# A hairline of gold instead of a hard outline.
+border           = "#e8c77d"
+border-alpha     = 0.22
 border-width     = 1
 
 [tooltip]
-background       = "#1c1c1e"
-background-alpha = 0.8
-text             = "#ffffff"
-border           = "#ffffff"
-border-alpha     = 0.12
+background       = "#1c1710"
+background-alpha = 0.74
+text             = "#f5efe0"
+border           = "#e8c77d"
+border-alpha     = 0.22
 
 [notifications]
-background       = "#1c1c1e"
-background-alpha = 0.74
-text             = "#ffffff"
-border           = "#ffffff"
-border-alpha     = 0.12
+background       = "#1c1710"
+background-alpha = 0.66
+text             = "#f5efe0"
+border           = "#e8c77d"
+border-alpha     = 0.24
 border-width     = 1
-countdown        = "#0a84ff"
+countdown        = "#e8c77d"
 
 [launcher]
-background                = "#1c1c1e"
-background-alpha          = 0.72
-text                      = "#ffffff"
-border                    = "#ffffff"
-border-alpha              = 0.12
-scrim                     = "#000000"
-scrim-alpha               = 0.45
-# The selected row is an iOS list selection: solid systemBlue, white label.
-selected-background       = "#0a84ff"
+background                = "#1c1710"
+background-alpha          = 0.62
+text                      = "#f5efe0"
+border                    = "#e8c77d"
+border-alpha              = 0.22
+scrim                     = "#0d0b07"
+scrim-alpha               = 0.4
+# The selected row is a solid gold pill with dark text, the way iOS fills a row.
+selected-background       = "#e8c77d"
 selected-background-alpha = 0.95
-selected-text             = "#ffffff"
-selected-border           = "#0a84ff"
+selected-text             = "#14110a"
+selected-border           = "#e8c77d"
 selected-border-alpha     = 0.0
 
 [menu]
-background                = "#1c1c1e"
-background-alpha          = 0.74
-text                      = "#ffffff"
-border                    = "#ffffff"
-border-alpha              = 0.12
-scrim                     = "#000000"
-scrim-alpha               = 0.45
-selected-background       = "#0a84ff"
+background                = "#1c1710"
+background-alpha          = 0.62
+text                      = "#f5efe0"
+border                    = "#e8c77d"
+border-alpha              = 0.22
+scrim                     = "#0d0b07"
+scrim-alpha               = 0.4
+selected-background       = "#e8c77d"
 selected-background-alpha = 0.95
-selected-text             = "#ffffff"
-selected-border           = "#0a84ff"
+selected-text             = "#14110a"
+selected-border           = "#e8c77d"
 selected-border-alpha     = 0.0
 
 [polkit]
-background       = "#1c1c1e"
-background-alpha = 0.86
-text             = "#ffffff"
-text-error       = "#ff453a"
-border           = "#ffffff"
-border-error     = "#ff453a"
-border-alpha     = 0.12
-scrim            = "#000000"
+background       = "#1c1710"
+background-alpha = 0.8
+text             = "#f5efe0"
+text-error       = "#e5645a"
+border           = "#e8c77d"
+border-error     = "#e5645a"
+border-alpha     = 0.24
+scrim            = "#0d0b07"
 scrim-alpha      = 0.5
-accent           = "#0a84ff"
+accent           = "#e8c77d"
 
 [lock]
-background       = "#1c1c1e"
-background-alpha = 0.55
-text             = "#ffffff"
-placeholder      = "#8e8e93"
-text-error       = "#ff453a"
-border           = "#ffffff"
-border-active    = "#0a84ff"
-border-error     = "#ff453a"
-border-alpha     = 0.22
-selection        = "#0a84ff"
+background       = "#1c1710"
+background-alpha = 0.5
+text             = "#f5efe0"
+placeholder      = "#a2957a"
+text-error       = "#e5645a"
+border           = "#e8c77d"
+border-active    = "#e8c77d"
+border-error     = "#e5645a"
+border-alpha     = 0.3
+selection        = "#e8c77d"
 selection-alpha  = 0.45
 
 [image-picker]
-scrim                   = "#000000"
+scrim                   = "#0d0b07"
 scrim-alpha             = 0.5
-text                    = "#ffffff"
-selected-border         = "#0a84ff"
+text                    = "#f5efe0"
+selected-border         = "#e8c77d"
 selected-border-alpha   = 1.0
-unselected-border       = "#ffffff"
+unselected-border       = "#f5efe0"
 unselected-border-alpha = 0.22

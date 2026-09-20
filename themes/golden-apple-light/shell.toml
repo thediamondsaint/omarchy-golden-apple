@@ -1,0 +1,139 @@
+# Golden Apple Light — Omarchy shell surfaces.
+#
+# Same construction as the dark variant, on cream: translucent surfaces here, the
+# blur in themes/golden-apple-light/hyprland.lua. Corner radius and gaps come from
+# Hyprland's `decoration:rounding`, which that file sets to 14.
+
+[bar]
+background       = "#fffdf7"
+background-alpha = 0.58
+text             = "#2a2318"
+active           = "#b23a2e"
+scale-with-font  = true
+size-horizontal  = 28
+size-vertical    = 30
+
+[hyprland]
+active-border            = "rgba(c79a3aff) rgba(a87a1fff) 45deg"
+active-border-foreground = "#a87a1f"
+
+[controls]
+normal-color        = "#2a2318"
+normal-fill-alpha   = 0.06
+normal-border       = "#a87a1f"
+normal-border-width = 0
+normal-border-alpha = 0.0
+
+hover-cursor-color        = "#a87a1f"
+hover-cursor-fill-alpha   = 0.14
+hover-cursor-border       = "#a87a1f"
+hover-cursor-border-width = 0
+hover-cursor-border-alpha = 0.0
+
+focus-color        = "#a87a1f"
+focus-fill-alpha   = 0.16
+focus-border       = "#a87a1f"
+focus-border-width = 1
+focus-border-alpha = 0.6
+
+selected-color        = "#a87a1f"
+selected-fill-alpha   = 0.24
+selected-border       = "#a87a1f"
+selected-border-width = 0
+selected-border-alpha = 1.0
+
+pressed-fill-alpha   = 0.22
+selection-fill-alpha = 0.30
+
+[spacing]
+scale = 1.08
+scale-with-font = true
+
+[font]
+base-size = 12
+
+[popups]
+background       = "#fffdf7"
+background-alpha = 0.74
+text             = "#2a2318"
+border           = "#a87a1f"
+border-alpha     = 0.22
+border-width     = 1
+
+[tooltip]
+background       = "#fffdf7"
+background-alpha = 0.86
+text             = "#2a2318"
+border           = "#a87a1f"
+border-alpha     = 0.22
+
+[notifications]
+background       = "#fffdf7"
+background-alpha = 0.78
+text             = "#2a2318"
+border           = "#a87a1f"
+border-alpha     = 0.24
+border-width     = 1
+countdown        = "#a87a1f"
+
+[launcher]
+background                = "#fffdf7"
+background-alpha          = 0.74
+text                      = "#2a2318"
+border                    = "#a87a1f"
+border-alpha              = 0.22
+scrim                     = "#2a2318"
+scrim-alpha               = 0.22
+selected-background       = "#c79a3a"
+selected-background-alpha = 0.95
+selected-text             = "#ffffff"
+selected-border           = "#c79a3a"
+selected-border-alpha     = 0.0
+
+[menu]
+background                = "#fffdf7"
+background-alpha          = 0.74
+text                      = "#2a2318"
+border                    = "#a87a1f"
+border-alpha              = 0.22
+scrim                     = "#2a2318"
+scrim-alpha               = 0.22
+selected-background       = "#c79a3a"
+selected-background-alpha = 0.95
+selected-text             = "#ffffff"
+selected-border           = "#c79a3a"
+selected-border-alpha     = 0.0
+
+[polkit]
+background       = "#fffdf7"
+background-alpha = 0.9
+text             = "#2a2318"
+text-error       = "#b23a2e"
+border           = "#a87a1f"
+border-alpha     = 0.24
+border-error     = "#b23a2e"
+scrim            = "#2a2318"
+scrim-alpha      = 0.3
+accent           = "#a87a1f"
+
+[lock]
+background       = "#fffdf7"
+background-alpha = 0.6
+text             = "#2a2318"
+placeholder      = "#8a7c5f"
+text-error       = "#b23a2e"
+border           = "#a87a1f"
+border-active    = "#c79a3a"
+border-error     = "#b23a2e"
+border-alpha     = 0.26
+selection        = "#c79a3a"
+selection-alpha  = 0.35
+
+[image-picker]
+scrim                   = "#2a2318"
+scrim-alpha             = 0.3
+text                    = "#2a2318"
+selected-border         = "#a87a1f"
+selected-border-alpha   = 1.0
+unselected-border       = "#2a2318"
+unselected-border-alpha = 0.22

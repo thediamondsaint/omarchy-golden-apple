@@ -1,18 +1,18 @@
--- Golden Apple — window look'n'feel.
+-- Golden Apple Light — window look'n'feel.
 --
--- Everything is glass: the bar, the menus, the notifications and the bar's own
--- panels are frosted, and the terminal draws its background transparent (see
--- foot.ini). Corners are continuous squircles, borders are a hairline of light
--- gold, and motion follows Apple's curves.
+-- Everything is glass: windows are translucent and blurred, and so are the bar,
+-- the menus, the notifications and the bar's own panels. Corners are continuous
+-- (the squircle iOS draws), borders are a hairline of light gold, and motion
+-- follows Apple's curves.
 --
 -- On speed: the blur runs with `xray` on, so it samples the wallpaper rather than
 -- the stack of windows underneath. That keeps one consistent material instead of a
 -- smear of whatever is open, and it costs the same whether one window is open or
--- twenty. Two passes is the whole budget — README > Performance has the lines that
--- turn the glass off if you want it flat.
+-- twenty. Two passes is the whole budget — README > Performance has the two lines
+-- that turn the glass off if you want it flat.
 
-local active_border = { colors = { "rgba(e8c77dff)", "rgba(c79a3aff)" }, angle = 45 }
-local inactive_border = "rgba(6b5d4266)"
+local active_border = { colors = { "rgba(c79a3aff)", "rgba(a87a1fff)" }, angle = 45 }
+local inactive_border = "rgba(c9b58c99)"
 
 hl.config({
   general = {
@@ -47,10 +47,10 @@ hl.config({
       xray = true,
       noise = 0.015,
       contrast = 1.05,
-      brightness = 0.82,
+      brightness = 1.08,
       -- Glass keeps the colour of whatever is behind it; the surfaces do the gold tinting.
       vibrancy = 0.35,
-      vibrancy_darkness = 0.4,
+      vibrancy_darkness = 0.05,
       popups = true,
       special = true,
     },
@@ -59,8 +59,8 @@ hl.config({
       enabled = true,
       range = 18,
       render_power = 3,
-      color = "rgba(00000066)",
-      color_inactive = "rgba(00000038)",
+      color = "rgba(3a2c1029)",
+      color_inactive = "rgba(3a2c1016)",
     },
   },
 })
@@ -70,7 +70,7 @@ hl.config({
 -- adds a little air for everything else. Omarchy tags windows `default-opacity` and
 -- gives them 0.985/0.96, and this file loads after that, so these values win. Apps
 -- that opt out of the tag (video, image viewers) stay opaque, which is what you want.
-o.window({ tag = "default-opacity" }, { opacity = "0.97 0.93" })
+o.window({ tag = "default-opacity" }, { opacity = "0.97 0.94" })
 
 -- Frost the shell's own layers (bar, menus, notifications, OSD, bar panels).
 -- No ignore_alpha here: with it set, Hyprland skips the blur on these surfaces entirely

@@ -1,12 +1,12 @@
 #!/usr/bin/env bash
-# Remove the iOS theme and put your previous theme back.
+# Remove the Golden Apple theme and put your previous theme back.
 #
-#   ./uninstall.sh              switch away, then delete both iOS themes
+#   ./uninstall.sh              switch away, then delete both Golden Apple themes
 #   ./uninstall.sh --keep       switch away but leave the theme files installed
 set -uo pipefail
 
 themes_dir="$HOME/.config/omarchy/themes"
-state="$HOME/.local/state/omarchy-ios-theme"
+state="$HOME/.local/state/omarchy-golden-apple"
 keep=0
 for arg in "$@"; do
   case "$arg" in
@@ -20,11 +20,11 @@ command -v omarchy >/dev/null 2>&1 || { echo "needs omarchy on PATH" >&2; exit 1
 
 current=$(omarchy theme current 2>/dev/null | head -1)
 case "${current,,}" in
-  ios|"ios light"|ios-light)
+  "golden apple"|golden-apple|"golden apple light"|golden-apple-light)
     previous=""
     [ -f "$state/previous-theme" ] && previous=$(head -1 "$state/previous-theme")
     # A previous install may have recorded this theme as its own predecessor; ignore that.
-    case "${previous,,}" in ios|"ios light"|ios-light) previous="" ;; esac
+    case "${previous,,}" in "golden apple"|golden-apple|"golden apple light"|golden-apple-light) previous="" ;; esac
     if [ -z "$previous" ]; then
       # Nothing remembered (installed by hand, say): fall back to a stock theme.
       previous="Tokyo Night"
@@ -35,24 +35,24 @@ case "${current,,}" in
       echo "could not switch to '$previous'; pick one yourself: omarchy theme list" >&2
     }
     ;;
-  *) echo "the iOS theme is not the current one ($current), leaving the theme as it is" ;;
+  *) echo "the Golden Apple theme is not the current one ($current), leaving the theme as it is" ;;
 esac
 
 if [ "$keep" -eq 0 ]; then
-  for v in ios ios-light; do
+  for v in golden-apple golden-apple-light; do
     if [ -d "$themes_dir/$v" ]; then
       rm -rf "$themes_dir/$v" && echo "removed $themes_dir/$v"
     fi
   done
   rm -f "$state/previous-theme"
   shopt -s nullglob
-  saved=("$themes_dir"/ios.bak.* "$themes_dir"/ios-light.bak.*)
+  saved=("$themes_dir"/golden-apple.bak.* "$themes_dir"/golden-apple-light.bak.*)
   shopt -u nullglob
   if [ "${#saved[@]}" -gt 0 ]; then
     echo
     echo "these are copies of themes that were at those names before the install:"
     printf '  %s\n' "${saved[@]}"
-    echo "rename one back if you want it: mv <dir> $themes_dir/ios"
+    echo "rename one back if you want it: mv <dir> $themes_dir/golden-apple"
   fi
 fi
 
