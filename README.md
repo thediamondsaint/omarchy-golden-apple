@@ -5,6 +5,8 @@ the bar, the menus, the notifications and the terminal itself. For [Omarchy](htt
 
 Two variants: **Golden Apple** (dark) and **Golden Apple Light** (the same gold on warm paper).
 
+<p align="center"><img src="docs/golden-apple-lion.jpg" alt="Golden Apple over the gold lion wallpaper: translucent terminals and a glass bar with the lion showing through"></p>
+
 <p align="center"><img src="docs/golden-apple-desktop.jpg" alt="Golden Apple: rounded terminal windows with gold borders over an amber gradient, the wallpaper glowing through the glass, and a translucent bar"></p>
 
 <p align="center"><img src="docs/golden-apple-light-desktop.jpg" width="49%" alt="The light variant: cream cards with gold borders on warm paper"> <img src="docs/golden-apple-menu.jpg" width="49%" alt="The Omarchy menu as gold-tinted frosted glass with a solid gold selected row"></p>
@@ -131,6 +133,13 @@ After editing anything in the installed theme, re-apply it: `omarchy theme set g
 - **Blur is invisible.** With a flat gradient wallpaper there is nothing to blur. Try a photograph.
 - **The picker shows "Golden Apple" but `omarchy theme set Golden Apple` fails.** Use the folder name:
   `omarchy theme set golden-apple`.
+
+## Documentation
+
+- [How it works](docs/how-it-works.md): which file does what, where the glass comes from
+- [Customizing](docs/customizing.md): glass, shape, colours, wallpapers
+- [Troubleshooting](docs/troubleshooting.md): symptoms and fixes, starting over
+- [Changelog](CHANGELOG.md) and [Contributing](CONTRIBUTING.md)
 
 ## License
 
