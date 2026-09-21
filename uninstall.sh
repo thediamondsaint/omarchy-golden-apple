@@ -38,6 +38,10 @@ case "${current,,}" in
   *) echo "the Golden Apple theme is not the current one ($current), leaving the theme as it is" ;;
 esac
 
+if [ -f "$state/bar-was-transparent" ]; then
+  omarchy bar transparent true >/dev/null 2>&1 && echo "put the bar's 'transparent' mode back" && rm -f "$state/bar-was-transparent"
+fi
+
 if [ "$keep" -eq 0 ]; then
   for v in golden-apple golden-apple-light; do
     if [ -d "$themes_dir/$v" ]; then

@@ -129,6 +129,17 @@ if [ "$do_apply" -eq 1 ]; then
   echo "applying $apply..."
   omarchy theme set "$apply" || die "omarchy theme set $apply failed"
 
+  # A "transparent" bar has no surface of its own and picks black or cream text from the
+  # wallpaper under it, which is how you get half the icons black and half cream. The
+  # theme's bar is a tinted glass surface with fixed theme text, so turn that mode off
+  # (remembered, so ./uninstall.sh can put it back).
+  if have jq && [ "$(jq -r '.bar.transparent // false' "$HOME/.config/omarchy/shell.json" 2>/dev/null)" = "true" ]; then
+    if omarchy bar transparent false >/dev/null 2>&1; then
+      : > "$state/bar-was-transparent"
+      echo "turned off the bar's 'transparent' mode so its icons follow the theme (./uninstall.sh restores it)"
+    fi
+  fi
+
   # The theme brings Hyprland config with it; make sure Hyprland took it.
   if have hyprctl; then
     hyprctl reload >/dev/null 2>&1

@@ -16,10 +16,11 @@ Two variants: **Golden Apple** (dark) and **Golden Apple Light** (the same gold 
 | Windows | 14px continuous corners (`rounding_power 3.4`), 1px hairline border, light-gold gradient when focused, soft shadow |
 | Terminal | Actually transparent — `alpha` in `foot.ini`, so the background goes to glass and the **text stays fully opaque** |
 | Bar, menus, notifications, OSD | Translucent, blurred, and tinted gold: `#1c1710` at 62% over a 20px blur |
+| Bar icons | One colour — the theme's cream (gold when active), never black on some and white on others |
 | Selected rows | A solid light-gold pill with dark text |
 | Colours | Champagne gold `#e8c77d` carries the accent; the ANSI set leans warm so nothing reads cold beside it |
 | Motion | Soft standard ease, a small overshoot on appear, a quick exit, Home Screen-style workspace slide |
-| Wallpapers | Four warm mesh gradients per variant — amber, ember, savanna, bronze (and champagne, honey, linen, parchment) |
+| Wallpapers | A gold lion, plus four warm mesh gradients per variant — amber, ember, savanna, bronze (and champagne, honey, linen, parchment) |
 
 Pairs with [omarchy-ios-bar](https://github.com/thediamondsaint/omarchy-ios-bar), which redraws the bar's
 status icons as vector shapes that follow the theme's colours. The two are independent.
@@ -51,7 +52,12 @@ that clone with the real thing.
 
 Requirements: Omarchy 4. Optional: ImageMagick, only to regenerate wallpapers at your own resolution.
 
-## Your own wallpaper (a lion, for instance)
+## Wallpapers
+
+Both variants ship with a gold lion (`0-lion.jpg`, 2560×1600) first in the rotation, followed by the
+generated gradients. `omarchy theme bg next` cycles.
+
+## Your own wallpaper
 
 ```bash
 tools/add-wallpaper.sh ~/Pictures/lion.jpg                       # dark variant
@@ -115,6 +121,10 @@ After editing anything in the installed theme, re-apply it: `omarchy theme set g
   a theme registered even across `hyprctl reload`, so if you previously ran a theme that set `no_blur`
   on windows, that rule stays until Hyprland restarts — log out and back in once. The shell's own
   surfaces (bar, menus) blur immediately either way.
+- **Some bar icons are black, some cream.** The bar was in "transparent" mode, where Omarchy picks black
+  or cream text from the wallpaper under the bar and only some widgets follow it. `./install.sh` turns
+  that off (`omarchy bar transparent false`) so the bar is the theme's tinted glass with theme-coloured
+  icons; `./uninstall.sh` turns it back on if it was on.
 - **An app is opaque.** Only apps that draw a transparent background can be glass. The terminal does it
   through `foot.ini`; Electron and most GTK apps cannot, and a Hyprland `opacity` rule fades their text
   along with the background, which is why this theme keeps that rule gentle.
